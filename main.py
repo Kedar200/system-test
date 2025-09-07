@@ -60,7 +60,7 @@ async def delayed_call(url: str, delay_minutes: int = 5):
 @app.get("/endpoint-a")
 async def endpoint_a(background_tasks: BackgroundTasks):
     """Endpoint A that schedules a call to Endpoint B after 5 minutes"""
-    endpoint_b_url = "http://localhost:8000/endpoint-b"
+    endpoint_b_url = "https://system-test-sbqg.onrender.com/endpoint-b"
     
     # Schedule the delayed call to endpoint B
     background_tasks.add_task(delayed_call, endpoint_b_url)
@@ -78,7 +78,7 @@ async def endpoint_a(background_tasks: BackgroundTasks):
 @app.get("/endpoint-b")
 async def endpoint_b(background_tasks: BackgroundTasks):
     """Endpoint B that schedules a call to Endpoint A after 5 minutes"""
-    endpoint_a_url = "http://localhost:8000/endpoint-a"
+    endpoint_a_url = "https://system-test-sbqg.onrender.com/endpoint-a"
     
     # Schedule the delayed call to endpoint A
     background_tasks.add_task(delayed_call, endpoint_a_url)
@@ -105,7 +105,7 @@ async def get_call_history():
 @app.get("/start-cycle")
 async def start_cycle(background_tasks: BackgroundTasks):
     """Start the calling cycle by calling Endpoint A"""
-    endpoint_a_url = "http://localhost:8000/endpoint-a"
+    endpoint_a_url = "https://system-test-sbqg.onrender.com/endpoint-a"
     
     try:
         async with httpx.AsyncClient() as client:
